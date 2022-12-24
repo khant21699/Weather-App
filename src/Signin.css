@@ -1,0 +1,15 @@
+.signIn {
+  padding-top: 308px;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+.google__Button {
+  float: none;
+  position: static;
+  display: block;
+  margin: auto;
+  margin-top: 250px;
+  width: max-content;
+}

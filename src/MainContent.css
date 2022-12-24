@@ -1,0 +1,27 @@
+.mainContent {
+  width: 100vw;
+  /* height: calc(100vh - 100px); */
+  background-color: transparent;
+  display: grid;
+  grid-template-areas:
+    "overview detail"
+    "forecast forecast";
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50vh 50vh;
+}
+.overview {
+  grid-area: overview;
+}
+.deatil {
+  grid-area: detail;
+}
+.hourly {
+  grid-area: forecast;
+}
+
+@media screen and (max-width: 992px) {
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+  }
+}

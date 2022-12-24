@@ -1,0 +1,92 @@
+.weatherDetail {
+  padding-top: 50px;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "wind high cloud"
+    "humidity low country";
+  grid-template-rows: 50% 50%;
+
+  align-items: center;
+}
+
+.wind {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  grid-area: wind;
+}
+
+.humidity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  grid-area: humidity;
+}
+
+.minTemp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  grid-area: low;
+}
+
+.maxTemp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  grid-area: high;
+}
+.cloud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  grid-area: cloud;
+}
+.country {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  grid-area: country;
+}
+
+.container {
+  aspect-ratio: 1.2/0.9;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .weatherDetail {
+    margin-bottom: 90px;
+    object-fit: cover;
+  }
+  .weatherDetail div {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .container {
+    aspect-ratio: 1.2/0.9;
+    width: 100px;
+  }
+}
