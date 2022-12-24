@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { UseAuth } from "./Context/AuthContext";
 import Hourly from "./Hourly";
 import "./MainContent.css";
 import WeatherDetail from "./WeatherDetail";
 import WeatherOverview from "./WeatherOverview";
 
 const MainContent = () => {
+  var [templocation, setTemplocation] = useState();
+  const { city } = UseAuth();
   var currentLocation = "";
   const baseURL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?location=";
   const [URL, setURL] = useState();
@@ -18,7 +21,6 @@ const MainContent = () => {
   const [hourly, setHourly] = useState(null);
   // var latitude = "";
   // var longitude = "";
-
   const findMyLocation = () => {
     const success = (position) => {
       const latitude = position.coords.latitude;
@@ -29,13 +31,29 @@ const MainContent = () => {
         currentLocation = latitude + longitude;
       }
       setURL(baseURL + currentLocation);
-      setWeatherURL(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}9&appid=${weatherAPIKey}&units=metric`
-      );
+      // setWeatherURL(
+      //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}9&appid=${weatherAPIKey}&units=metric`
+      // );
       setHourlyrURL(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}&units=metric`
       );
-      console.log(hourlyURL);
+
+      city
+        ? setWeatherURL(
+            `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPIKey}&units=metric`
+          )
+        : setWeatherURL(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}9&appid=${weatherAPIKey}&units=metric`
+          );
+      city
+        ? setHourlyrURL(
+            `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherAPIKey}&units=metric`
+          ) && console.log("ayerkew")
+        : setHourlyrURL(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${weatherAPIKey}&units=metric`
+          );
+
+      city ? setLocation(city) : setLocation(templocation);
     };
 
     const error = () => {
@@ -58,7 +76,7 @@ const MainContent = () => {
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
-        setLocation(response.data[0].city);
+        setTemplocation(response.data[0].city);
       })
       .catch((err) => console.error(err));
   };

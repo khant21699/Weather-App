@@ -13,6 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
   const [userExist, setUserExist] = useState(false);
   const [user, setUser] = useState(null);
+  const [city, setCity] = useState(null);
   const googleSignIn = () => {
     signInWithPopup(auth, provider).then((data) => {
       setUser(data.user);
@@ -27,13 +28,26 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  const getCity = (value) => {
+    setCity(value);
+  };
+
   useEffect(() => {
     setUser(localStorage.getItem("User"));
     console.log(user);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, user, userExist, SignOut }}>
+    <AuthContext.Provider
+      value={{
+        googleSignIn,
+        user,
+        userExist,
+        SignOut,
+        city,
+        getCity,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

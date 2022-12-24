@@ -6,7 +6,12 @@ import Home from "./Home";
 
 function App() {
   const { userExist } = UseAuth();
-  return <div className="App">{!userExist ? <Signin /> : <Home />}</div>;
+  return (
+    <div className="App">
+      {!userExist ? <Signin /> : <Home />}
+      {/* <Home /> */}
+    </div>
+  );
 }
 document.title = "Weather App";
 function Root() {
